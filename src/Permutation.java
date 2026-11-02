@@ -16,14 +16,15 @@ public class Permutation {
      */
     public static void main(String[] args) throws FileNotFoundException {
         int k = Integer.parseInt(args[0]);
-        if(k>52){
-            throw new Error("more cards requested than there are in deck");
-        }
+
         Scanner scan = new Scanner(new File("src/cards.txt"));
         RandomizedQueue<String> deck = new RandomizedQueue<>();
         while(scan.hasNext()){
             String card = scan.next();
             deck.enqueue(card);
+        }
+        if(k>deck.size()){
+            throw new Error("more cards requested than there are in deck");
         }
         Iterator<String> g = deck.iterator();
         for(int i=0; i<k;i++){
