@@ -90,13 +90,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         RandomizedQueueIterator(){
             RandomizedQueue<Item> itemcopy= new RandomizedQueue<Item>();
-            for(int i=0; i<items.length; i++){
-                itemcopy.items[i]=items[i];
-            }
+            itemcopy.items = (Item[]) new Object[items.length];
             shuffledItems = (Item[]) new Object[items.length];
-            for(int i=0; i<items.length; i++){
-                shuffledItems[i]=itemcopy.dequeue();
+            if(!isEmpty()){
+                for(int i=0; i<items.length; i++){
+                    itemcopy.items[i]=items[i];
+                }
+                for(int i=0; i<items.length; i++){
+                    shuffledItems[i]=itemcopy.dequeue();
+                }
             }
+
+
         }
         public boolean hasNext() {
             return !(current==size);

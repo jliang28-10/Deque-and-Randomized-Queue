@@ -84,7 +84,7 @@ public class RandomizedQueueTest {
         while (!queue.isEmpty()) {
             int value = queue.dequeue();
             removed.add(value);
-            sizesCorrect &= queue.size() == 4 - removed.size();
+            sizesCorrect &= queue.size() == original.size() - removed.size();
         }
         check("RandomizedQueue dequeue returns original items and decrements size", removed.equals(original) && sizesCorrect);
     }
