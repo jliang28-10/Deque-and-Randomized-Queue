@@ -45,7 +45,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
     public void resize(int n){
         Item[] newItem = (Item[]) new Object[n];
-        for(int i=0;i<items.length; i++){
+        for(int i=0;i<size; i++){
             newItem[i]=items[i];
         }
         items=newItem;
@@ -89,16 +89,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private int current=0;
 
         RandomizedQueueIterator(){
-            RandomizedQueue<Item> itemcopy= new RandomizedQueue<Item>();
-            itemcopy.items = (Item[]) new Object[items.length];
-            shuffledItems = (Item[]) new Object[items.length];
-            if(!isEmpty()){
-                for(int i=0; i<items.length; i++){
-                    itemcopy.items[i]=items[i];
-                }
-                for(int i=0; i<items.length; i++){
-                    shuffledItems[i]=itemcopy.dequeue();
-                }
+
+            shuffledItems = (Item[]) new Object[size];
+            resize(size);
+            for(int i=0; i<size; i++){
+                enqueue(dequeue());
+            }
+            for(int i=0; i<size; i++){
+                shuffledItems[i]=items[i];
             }
 
 
